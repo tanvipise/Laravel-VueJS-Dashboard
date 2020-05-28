@@ -7,15 +7,22 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+window.form=Form;
 
 import VueRouter from 'vue-router'
+import { Form, HasError, AlertError } from 'vform';
+import moment from 'moment' ;
+
+
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
 
 Vue.use(VueRouter)
 
 let routes = [
     { path: '/home', component: require('./components/Home.vue').default},
     { path: '/account', component: require('./components/Account.vue').default},
-    { path: '/users', component: require('./components/Users.vue').default}
+    { path: '/new_user', component: require('./components/New User.vue').default},
   ]
 
 
@@ -24,6 +31,11 @@ let routes = [
     routes // short for `routes: routes`
   })
   
+
+  Vue.filter('myDate', function(created){
+      return moment(created).format('MMM Do YYYY');
+
+  })
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
